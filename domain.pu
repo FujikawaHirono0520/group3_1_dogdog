@@ -1,0 +1,16 @@
+@startuml
+skinparam componentStyle rectangle
+
+[Robodog] o-- [名前]
+[Robodog] o-- [時刻]
+[Robodog] o-- [挨拶]
+[Robodog] o-- [2つの整数]
+[Robodog] o-- [足し算の結果]
+
+[挨拶] <|-- [おはようございます]
+[挨拶] <|-- [こんにちは]
+[挨拶] <|-- [こんばんは]
+[2つの整数] <|-- [1つ目の整数]
+[2つの整数] <|-- [2つ目の整数]
+
+@enduml

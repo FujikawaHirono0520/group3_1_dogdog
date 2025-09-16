@@ -1,0 +1,35 @@
+@startuml add
+hide footbox
+
+actor       ユーザー       as A
+boundary    メニュー画面    as B1
+boundary    整数入力画面    as B2
+control     整数の足し算     as C
+boundary    計算結果画面    as B3
+
+'時系列①
+activate A
+A -> B1: 足し算を選択()
+activate B1
+B1 -> B2: 表示()
+activate B2
+deactivate B1
+A -> B2: 整数入力()
+B2 -> C: 整数引き渡し()
+activate C
+deactivate B2
+
+
+alt 入力値が不正な場合
+  C -> B3: エラーメッセージ表示()
+  activate B3
+  deactivate B3
+end
+
+C -> B3: 計算結果表示()
+activate B3
+deactivate C
+deactivate B3
+deactivate A
+
+@enduml

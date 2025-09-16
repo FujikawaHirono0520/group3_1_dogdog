@@ -18,14 +18,6 @@ A -> B2: 整数入力()
 B2 -> C: 整数引き渡し()
 activate C
 deactivate B2
-
-
-alt 入力値が不正な場合
-  C -> B3: エラーメッセージ表示()
-  activate B3
-  deactivate B3
-end
-
 C -> B3: 計算結果表示()
 activate B3
 deactivate C

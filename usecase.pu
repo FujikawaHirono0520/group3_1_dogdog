@@ -1,0 +1,12 @@
+@startuml usecase
+left to right direction
+actor "ユーザー" as fc
+rectangle RoboDog {
+  usecase "名前を変更する" as UC1
+  usecase "時刻に応じた挨拶をする" as UC2
+  usecase "二つの整数の足し算をする" as UC3
+}
+fc --> UC1
+fc --> UC2
+fc --> UC3
+@enduml

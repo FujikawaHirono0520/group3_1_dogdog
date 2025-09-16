@@ -27,22 +27,16 @@ deactivate B1
 activate B2
 
 A -> B2: 新しい名前を入力()
-
-alt 入力値チェック
-    B2 -> B2: 入力値バリデーション()
-    B2 --> A: エラー表示（無効な名前）()
-else 正常入力
-    B2 -> C2: 新しい名前を登録依頼()
-    activate C2
-    C2 -> E: 名前保存()
-    activate E
-    E --> C2: 保存完了()
-    deactivate E
-    C2 -> B3: 結果を表示()
-    deactivate C2
-    deactivate B2
-    activate B3
-    B3 --> A: 名前変更完了メッセージ()
-end
+B2 -> C2: 新しい名前を登録依頼()
+activate C2
+C2 -> E: 名前保存()
+activate E
+E --> C2: 保存完了()
+deactivate E
+C2 -> B3: 結果を表示()
+deactivate C2
+deactivate B2
+activate B3
+B3 --> A: 名前変更完了メッセージ()
 
 @enduml

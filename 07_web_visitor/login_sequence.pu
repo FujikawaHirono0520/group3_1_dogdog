@@ -1,0 +1,37 @@
+@startuml .
+
+hide footbox
+
+actor       ユーザー       as A
+boundary    ログイン画面    as B
+boundary    メニュー画面    as B1
+control     メニュー画面表示 as C
+control     認証          as D
+entity      訪問者システム as E
+
+activate A
+A -> B: ユーザID、パスワード入力後、送信
+activate B
+B -> D: ユーザID、パスワード送信
+activate D
+D -> E: 認証()
+activate E
+E --> D: 認証結果
+deactivate E
+
+alt 認証失敗
+  D --> B: 認証失敗メッセージ表示()
+end
+
+D --> C: 認証成功
+deactivate D
+activate C
+C --> B1: メニュー画面表示()
+deactivate C
+activate B1
+
+deactivate A
+deactivate B
+deactivate B1
+
+@enduml

@@ -1,0 +1,61 @@
+@startuml Web訪問者システム-変更シーケンス図
+hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor ユーザー as A
+boundary メニュー画面 as B1
+control 訪問者情報の取得 as C1
+boundary 訪問者情報変更画面 as B2
+control 入力のチェック as C2
+control 訪問者情報の更新 as C3
+entity 訪問者情報 as E
+boundary 訪問者情報変更完了画面 as B3
+
+activate A
+
+A -> B1: 訪問者情報変更を選択()
+activate B1
+
+B1 -> C1: 起動()
+deactivate B1
+activate C1
+
+C1 -> E: 訪問者情報の取得()
+activate E
+E --> C1: 訪問者情報
+deactivate E
+
+C1 -> B2: 表示()
+deactivate C1
+activate B2
+
+A -> B2: 変更内容の入力()
+
+B2 -> C2: 送信()
+activate C2
+
+opt 入力内容にエラーあり
+    C2 --> B2: エラーメッセージ付き表示()
+    ...以下、再度入力して送信...
+end
+
+C2 -> C3: 起動()
+deactivate C2
+activate C3
+
+C3 -> E: 訪問者情報の更新()
+activate E
+E --> C3: 更新結果
+deactivate E
+
+deactivate B2
+
+C3 -> B3: 表示()
+deactivate C3
+activate B3
+deactivate B3
+deactivate A
+
+@enduml

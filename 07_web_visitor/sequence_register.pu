@@ -1,0 +1,49 @@
+@startuml
+
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor 訪問者 as u
+boundary ログイン画面
+boundary 新規登録画面
+control 認証
+entity 訪問者システム
+boundary メニュー画面
+
+u -> ログイン画面 : 「新規登録」を選択()
+activate ログイン画面
+ログイン画面 -> 新規登録画面 : 新規登録画面を表示()
+deactivate ログイン画面
+activate 新規登録画面
+
+u -> 新規登録画面 : 登録情報を入力・送信()
+新規登録画面 -> 認証 : 入力情報を送信()
+activate 認証
+
+alt 未入力項目や不正な値あり
+    認証 --> 新規登録画面 : エラーメッセージ表示・再入力促す
+
+else
+    認証 -> 訪問者システム : ユーザーID重複チェック()
+    activate 訪問者システム
+    alt ユーザーID重複
+        訪問者システム --> 認証 : ユーザーID重複()
+        認証 --> 新規登録画面 : エラーメッセージ表示・再入力促す
+        deactivate 新規登録画面
+
+    else
+        訪問者システム --> 認証 : 登録可
+        deactivate 訪問者システム
+        認証 -> 訪問者システム : ユーザー情報登録()
+        activate 訪問者システム
+        訪問者システム --> 認証 : 登録完了
+        deactivate 訪問者システム
+        認証 -> メニュー画面 : 登録完了通知()
+        activate メニュー画面
+        deactivate 認証
+        メニュー画面 --> u : メニュー画面を表示
+        deactivate メニュー画面
+    end
+end
+@enduml

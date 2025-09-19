@@ -1,0 +1,71 @@
+@startuml 図書館システム-予約シーケンス図
+hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor 事務職員 as A
+boundary メニュー画面 as B1
+boundary 予約画面 as B2
+control 入力内容の確認 as C1
+entity 会員情報 as E1
+control 書名から管理番号の取得 as C2
+entity 図書情報 as E2
+control 管理番号リストと会員番号の記録 as C3
+entity 予約情報 as E3
+boundary 予約完了画面 as B3
+
+activate A
+
+A -> B1: 「予約」を選択()
+activate B1
+
+B1 -> B2: 表示()
+deactivate B1
+activate B2
+
+B2 -> C1: 起動()
+activate C1
+
+C1 -> E1: 会員情報取得()
+activate E1
+E1 --> C1: 会員情報
+deactivate E1
+
+C1 -> E2: 図書情報取得()
+activate E2
+E2 --> C1: 図書情報
+deactivate E2
+
+opt 入力内容に誤りがある
+  C1 --> B2: 「入力内容に誤りがあります」と表示された予約画面に遷移()
+  ...以下、再度入力して送信...
+end
+
+C1 -> C2: 起動()
+deactivate C1
+activate C2
+
+C2 -> E2: 管理番号リスト取得()
+activate E2
+E2 --> C2: 管理番号リスト
+deactivate E2
+
+C2 -> C3: 起動()
+deactivate C2
+activate C3
+
+C3 -> E3: 記録()
+activate E3
+E3 --> C3
+deactivate E3
+
+C3 -> B3: 表示()
+deactivate C3
+deactivate B2
+activate B3
+
+deactivate B3
+deactivate A
+
+@enduml

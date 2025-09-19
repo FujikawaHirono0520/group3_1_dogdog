@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="A_JDbv112ITbuDIFLEMZ" name="ページ1">
-        <mxGraphModel dx="569" dy="559" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="712" dy="698" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -51,14 +51,6 @@
                         <mxPoint x="150" y="280" as="targetPoint"/>
                         <Array as="points"/>
                     </mxGeometry>
-                </mxCell>
-                <mxCell id="11" value="どの本をどの利用者&lt;div&gt;が予約しているかを&lt;/div&gt;&lt;div&gt;一覧画面&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="10">
-                    <mxGeometry x="-0.1421" y="-1" relative="1" as="geometry">
-                        <mxPoint x="59" y="-1" as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="12" value="返却された本の中に&lt;div&gt;予約されている本があれば&lt;/div&gt;&lt;div&gt;対象の利用者を選択&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-                    <mxGeometry x="10" y="230" width="170" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="13" value="図書館システム" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
                     <mxGeometry x="490" y="90" width="70" height="70" as="geometry"/>
@@ -123,6 +115,9 @@
                     <mxGeometry x="-0.0191" y="4" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="36" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 11px; background-color: rgb(255, 255, 255);&quot;&gt;・どの本をどの利用者&lt;/span&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;が予約しているかを&lt;/div&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;一覧で確認&lt;/div&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;・「メールの送信」を選択&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="37.5" y="220" width="150" height="70" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

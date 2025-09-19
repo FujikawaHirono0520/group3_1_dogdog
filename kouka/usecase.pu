@@ -1,4 +1,4 @@
-@startuml
+@startuml 大原情報科学大学・図書館システムユースケース図
 left to right direction
 actor 事務職員
 

@@ -1,0 +1,14 @@
+@startuml 図書館システム-クラス図1
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class 図書館システム {
+ -図書
+ -予約カード
+
+ +図書を借りる()
+ +予約カードを作成する()
+}
+
+@enduml

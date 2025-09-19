@@ -1,10 +1,9 @@
-@startuml
+@startuml 大原情報科学大学・図書館システムユースケース図
 left to right direction
-actor 会員
 actor 事務職員
 
 rectangle 図書館システム {
-  usecase "本を借りる" as UC1
+  usecase "本を貸し出す" as UC1
   usecase "本を返却する" as UC2
   usecase "図書を予約する" as UC3
   usecase "貸出履歴を閲覧する" as UC4
@@ -12,9 +11,9 @@ rectangle 図書館システム {
 
 }
 
-会員 --> UC1
-会員 --> UC2
-会員 --> UC3
+事務職員 --> UC1
+事務職員 --> UC2
+事務職員 --> UC3
 事務職員 --> UC4
 事務職員 --> UC5
 

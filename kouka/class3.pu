@@ -1,0 +1,15 @@
+@startuml 図書館システム-クラス図3
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class 図書 {
+ -管理番号
+ -貸出期間
+ -貸し出し履歴
+
+ +貸し出し履歴の記録()
+ +貸し出し履歴の閲覧()
+}
+
+@enduml

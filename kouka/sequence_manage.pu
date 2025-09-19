@@ -1,0 +1,42 @@
+@startuml 図書館システム - 予約管理シーケンス図
+
+' 藤川途中まで作成
+
+hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor 事務職員 as A
+boundary メニュー画面 as B1
+boundary 予約管理画面 as B2
+control 認証 as C1
+control メールの送信 as C2
+entity 図書館システム as E
+
+A -> B1: 「予約管理」を選択()
+activate B1
+
+B1 -> B2: 予約管理画面を表示()
+activate B2
+
+B2 -> C1: 「メールの送信」を選択()
+activate C1
+
+C1 -> E: 情報参照()
+activate E
+
+E --> C1: 結果
+deactivate E
+
+C1 -> C2: メールの送信()
+activate C2
+
+alt メール送信成功
+    C2 --> B2: 送信完了メッセージ表示
+else メール送信失敗
+    C2 --> B2: エラーメッセージ表示
+    deactivate C2
+end
+
+@enduml

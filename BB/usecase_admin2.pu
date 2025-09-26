@@ -1,0 +1,15 @@
+@startuml BB注文管理システムユースケース図
+left to right direction
+actor 管理者
+
+rectangle 在庫管理システム {
+  usecase "在庫を補充する" as UC1
+  usecase "商品を参照する" as UC2
+  usecase "在庫を廃棄する" as UC3
+
+}
+
+管理者 --> UC1
+管理者 --> UC2
+管理者 --> UC3
+@enduml

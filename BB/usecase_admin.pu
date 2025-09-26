@@ -1,0 +1,23 @@
+@startuml BB注文管理システムユースケース図
+left to right direction
+actor 管理者
+
+rectangle BB {
+  usecase "商品を登録する" as UC1
+  usecase "商品を更新する" as UC2
+  usecase "商品を削除する" as UC3
+  usecase "在庫を確認する" as UC4
+  usecase "返金する" as UC5
+  usecase "商品を配送する" as UC6
+  usecase "アカウントを管理する" as UC7
+
+}
+
+顧客 --> UC1
+顧客 --> UC2
+顧客 --> UC3
+顧客 --> UC4
+顧客 --> UC5
+顧客 --> UC6
+顧客 --> UC7
+@enduml

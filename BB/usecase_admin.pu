@@ -18,4 +18,38 @@ rectangle 注文管理システム {
 管理者 --> UC4
 管理者 --> UC5
 管理者 --> UC6
+
+actor 顧客
+
+rectangle BB {
+  usecase "ログインする" as UC7
+  usecase "ログアウトする" as UC8
+  usecase "商品を参照する" as UC9
+  usecase "商品を購入する" as UC10
+  usecase "注文履歴を確認する" as UC11
+  usecase "注文をキャンセルする" as UC12
+  usecase "商品を返品する" as UC13
+
+}
+
+顧客 --> UC7
+顧客 --> UC8
+顧客 --> UC9
+顧客 --> UC10
+顧客 --> UC11
+顧客 --> UC12
+顧客 --> UC13
+
+actor 在庫管理業者 as U1
+
+rectangle 在庫管理システム {
+  usecase "在庫を補充する" as UC14
+  usecase "商品を参照する" as UC15
+  usecase "在庫を廃棄する" as UC16
+
+}
+
+U1 --> UC14
+U1 --> UC15
+U1 --> UC16
 @enduml

@@ -1,55 +1,62 @@
 @startuml BB注文管理システムユースケース図
 left to right direction
-actor システム管理者
+actor 顧客 as U
 
-actor 顧客
+actor システム管理者 as M
 
-actor カスタマーサポート
+actor カスタマーサポート as CS
 
-actor 在庫管理業者
+actor 在庫管理者 as SM
 
-
-rectangle BBシステム {
-  usecase "商品を登録する" as UC1
-  usecase "商品を更新する" as UC2
-  usecase "商品を削除する" as UC3
-  usecase "返金する" as UC4
-  usecase "商品を配送する" as UC5
-  usecase "アカウントを管理する" as UC6
-
-  usecase "ログインする" as UC7
-  usecase "ログアウトする" as UC8
-  usecase "商品を参照する" as UC9
-  usecase "商品を購入する" as UC10
-  usecase "注文履歴を確認する" as UC11
-  usecase "注文をキャンセルする" as UC12
-  usecase "商品を返品する" as UC13
-
-  usecase "在庫を補充する" as UC14
-  usecase "在庫を参照する" as UC15
-  usecase "在庫を廃棄する" as UC16
+rectangle BBサイト {
+  usecase "ログインする" as UC1
+  usecase "ログアウトする" as UC2
+  usecase "商品を参照する" as UC3
+  usecase "カートに追加する" as UC4
+  usecase "カートを閲覧する" as UC5
+  usecase "カートから削除する" as UC6
+  usecase "商品を購入する" as UC7
+  usecase "注文履歴を確認する" as UC8
+  usecase "注文をキャンセルする" as UC9
+  usecase "商品を返品する" as UC10
 }
 
-システム管理者 --> UC1
-システム管理者 --> UC2
-システム管理者 --> UC3
-システム管理者 --> UC5
-システム管理者 --> UC6
-システム管理者 --> UC12
+rectangle 注文・在庫管理サイト {
+  usecase "商品を登録する" as UC11
+  usecase "商品を更新する" as UC12
+  usecase "商品を削除する" as UC13
+  usecase "商品を配送する" as UC14
+  usecase "アカウントを管理する" as UC15
+  usecase "返金する" as UC16
+  usecase "返品を受け付ける" as UC17
+  usecase "注文履歴を確認する" as UC18
+  usecase "在庫を補充する" as UC19
+  usecase "在庫を参照する" as UC20
+  usecase "在庫を廃棄する" as UC21
+}
 
-顧客 --> UC7
-顧客 --> UC8
-顧客 --> UC9
-顧客 --> UC10
-顧客 --> UC11
-顧客 --> UC12
-顧客 --> UC13
+U --> UC1
+U --> UC2
+U --> UC3
+U --> UC4
+U --> UC5
+U --> UC6
+U --> UC7
+U --> UC8
+U --> UC9
+U --> UC10
 
-カスタマーサポート --> UC11
-カスタマーサポート --> UC4
-カスタマーサポート --> UC13
+M --> UC11
+M --> UC12
+M --> UC13
+M --> UC14
+M --> UC15
+M --> UC16
 
-在庫管理業者 --> UC14
-在庫管理業者 --> UC15
-在庫管理業者 --> UC16
+CS --> UC17
+CS --> UC18
+
+SM --> UC19
+SM --> UC20
+SM --> UC21
 @enduml

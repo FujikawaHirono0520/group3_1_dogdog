@@ -24,18 +24,21 @@ rectangle BBサイト {
 }
 
 rectangle 注文・在庫管理サイト {
-  usecase "商品を登録する" as UC13
-  usecase "商品を更新する" as UC14
-  usecase "商品を削除する" as UC15
-  usecase "商品を配送する" as UC16
-  usecase "アカウントの閲覧" as UC17
-  usecase "アカウントの削除" as UC18
-  usecase "返金する" as UC19
-  usecase "返品を受け付ける" as UC20
-  usecase "注文履歴を確認する" as UC21
-  usecase "在庫を補充する" as UC22
-  usecase "在庫を参照する" as UC23
-  usecase "在庫を廃棄する" as UC24
+  usecase "アカウント作成" as UC13
+  usecase "ログインする" as UC14
+  usecase "ログアウトする" as UC15
+  usecase "商品を登録する" as UC16
+  usecase "商品を更新する" as UC17
+  usecase "商品を削除する" as UC18
+  usecase "商品を配送する" as UC19
+  usecase "アカウントの閲覧" as UC20
+  usecase "アカウントの削除" as UC21
+  usecase "返金する" as UC22
+  usecase "返品を受け付ける" as UC23
+  usecase "注文履歴を確認する" as UC24
+  usecase "在庫を補充する" as UC25
+  usecase "在庫を参照する" as UC26
+  usecase "在庫を廃棄する" as UC27
 }
 
 U --> UC1
@@ -58,11 +61,18 @@ M --> UC16
 M --> UC17
 M --> UC18
 M --> UC19
+M --> UC20
+M --> UC21
+M --> UC22
 
-CS --> UC20
-CS --> UC21
+CS --> UC14
+CS --> UC15
+CS --> UC23
+CS --> UC24
 
-SM --> UC22
-SM --> UC23
-SM --> UC24
+SM --> UC14
+SM --> UC15
+SM --> UC25
+SM --> UC26
+SM --> UC27
 @enduml

@@ -6,7 +6,7 @@ actor システム管理者 as M
 
 actor カスタマーサポート as CS
 
-actor 在庫管理業者 as SM
+actor 在庫管理者 as SM
 
 
 rectangle BBサイト {
@@ -36,6 +36,7 @@ rectangle 注文・在庫管理サイト {
 U --> UC1
 U --> UC2
 U --> UC3
+U --> UC4
 U --> UC5
 U --> UC6
 U --> UC7

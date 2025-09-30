@@ -4,11 +4,9 @@ actor 顧客 as U
 
 actor システム管理者 as M
 
-actor 商品管理者 as OM
+actor 注文在庫管理者 as SM
 
 actor カスタマーサポート as CS
-
-actor 在庫管理者 as SM
 
 rectangle BBサイト {
   usecase "顧客アカウント作成" as UC1
@@ -33,13 +31,16 @@ rectangle 注文・在庫管理サイト {
   usecase "商品項目を登録する" as UC17
   usecase "商品項目を更新する" as UC18
   usecase "商品項目を削除する" as UC19
-  usecase "返金する" as UC21
-  usecase "返品を受け付ける" as UC22
-  usecase "注文履歴を確認する" as UC23
-  usecase "決済履歴を確認する" as UC24
-  usecase "在庫を補充する" as UC25
-  usecase "在庫を参照する" as UC26
-  usecase "在庫を廃棄する" as UC27
+  usecase "商品を発送する" as UC20
+  usecase "在庫を補充する" as UC21
+  usecase "在庫を参照する" as UC22
+  usecase "在庫を廃棄する" as UC23
+  usecase "注文情報を印刷する" as UC24
+  usecase "注文情報を閲覧する" as UC25
+  usecase "返金する" as UC26
+  usecase "返品を受け付ける" as UC27
+  usecase "注文履歴を確認する" as UC28
+  usecase "決済履歴を確認する" as UC29
 }
 
 U --> UC1
@@ -60,16 +61,19 @@ M --> UC14
 M --> UC15
 M --> UC16
 
-OM --> UC17
-OM --> UC18
-OM --> UC19
-
-CS --> UC21
-CS --> UC22
-CS --> UC23
-CS --> UC24
-
+SM --> UC17
+SM --> UC18
+SM --> UC19
+SM --> UC20
+SM --> UC21
+SM --> UC22
+SM --> UC23
+SM --> UC24
 SM --> UC25
-SM --> UC26
-SM --> UC27
+
+CS --> UC26
+CS --> UC27
+CS --> UC28
+CS --> UC29
+
 @enduml

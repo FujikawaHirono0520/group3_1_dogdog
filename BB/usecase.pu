@@ -4,7 +4,7 @@ actor 顧客 as U
 
 actor システム管理者 as M
 
-actor 注文管理者 as OM
+actor 商品管理者 as OM
 
 actor カスタマーサポート as CS
 
@@ -30,12 +30,9 @@ rectangle 注文・在庫管理サイト {
   usecase "アカウントの閲覧" as UC14
   usecase "アカウント権限の変更" as UC15
   usecase "アカウントの停止" as UC16
-  ' usecase "ログインする" as UC17
-  ' usecase "ログアウトする" as UC18
   usecase "商品項目を登録する" as UC17
   usecase "商品項目を更新する" as UC18
   usecase "商品項目を削除する" as UC19
-  usecase "商品を配送する" as UC20
   usecase "返金する" as UC21
   usecase "返品を受け付ける" as UC22
   usecase "注文履歴を確認する" as UC23
@@ -59,28 +56,19 @@ U --> UC11
 U --> UC12
 
 M --> UC13
-' M --> UC17 
-' M --> UC18
 M --> UC14
 M --> UC15
 M --> UC16
 
-' OM --> UC17
-' OM --> UC18
 OM --> UC17
 OM --> UC18
 OM --> UC19
-OM --> UC20
-OM --> UC21
 
-' CS --> UC17
-' CS --> UC18
+CS --> UC21
 CS --> UC22
 CS --> UC23
 CS --> UC24
 
-' SM --> UC17
-' SM --> UC18
 SM --> UC25
 SM --> UC26
 SM --> UC27

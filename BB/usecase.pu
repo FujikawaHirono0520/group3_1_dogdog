@@ -4,12 +4,14 @@ actor 顧客 as U
 
 actor システム管理者 as M
 
+actor 注文管理者 as OM
+
 actor カスタマーサポート as CS
 
 actor 在庫管理者 as SM
 
 rectangle BBサイト {
-  usecase "アカウント作成" as UC1
+  usecase "顧客アカウント作成" as UC1
   usecase "顧客情報を変更する" as UC2
   usecase "ログインする" as UC3
   usecase "ログアウトする" as UC4
@@ -24,18 +26,20 @@ rectangle BBサイト {
 }
 
 rectangle 注文・在庫管理サイト {
-  usecase "アカウント作成" as UC13
-  usecase "ログインする" as UC14
-  usecase "ログアウトする" as UC15
-  usecase "商品を登録する" as UC16
-  usecase "商品を更新する" as UC17
-  usecase "商品を削除する" as UC18
-  usecase "商品を配送する" as UC19
-  usecase "アカウントの閲覧" as UC20
-  usecase "アカウントの削除" as UC21
-  usecase "返金する" as UC22
-  usecase "返品を受け付ける" as UC23
-  usecase "注文履歴を確認する" as UC24
+  usecase "管理サイトアカウント作成" as UC13
+  usecase "アカウントの閲覧" as UC14
+  usecase "アカウント権限の変更" as UC15
+  usecase "アカウントの停止" as UC16
+  ' usecase "ログインする" as UC17
+  ' usecase "ログアウトする" as UC18
+  usecase "商品項目を登録する" as UC17
+  usecase "商品項目を更新する" as UC18
+  usecase "商品項目を削除する" as UC19
+  usecase "商品を配送する" as UC20
+  usecase "返金する" as UC21
+  usecase "返品を受け付ける" as UC22
+  usecase "注文履歴を確認する" as UC23
+  usecase "決済履歴を確認する" as UC24
   usecase "在庫を補充する" as UC25
   usecase "在庫を参照する" as UC26
   usecase "在庫を廃棄する" as UC27
@@ -55,23 +59,28 @@ U --> UC11
 U --> UC12
 
 M --> UC13
+' M --> UC17 
+' M --> UC18
 M --> UC14
 M --> UC15
 M --> UC16
-M --> UC17
-M --> UC18
-M --> UC19
-M --> UC20
-M --> UC21
-M --> UC22
 
-CS --> UC14
-CS --> UC15
+' OM --> UC17
+' OM --> UC18
+OM --> UC17
+OM --> UC18
+OM --> UC19
+OM --> UC20
+OM --> UC21
+
+' CS --> UC17
+' CS --> UC18
+CS --> UC22
 CS --> UC23
 CS --> UC24
 
-SM --> UC14
-SM --> UC15
+' SM --> UC17
+' SM --> UC18
 SM --> UC25
 SM --> UC26
 SM --> UC27

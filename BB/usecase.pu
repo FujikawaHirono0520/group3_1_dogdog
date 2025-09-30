@@ -39,8 +39,7 @@ rectangle 注文・在庫管理サイト {
   usecase "注文情報を変更する" as UC25
   usecase "返金する" as UC26
   usecase "返品を受け付ける" as UC27
-  usecase "注文情報を変更する" as UC28
-  usecase "決済履歴を確認する" as UC29
+  usecase "決済履歴を確認する" as UC28
 }
 
 U --> UC1
@@ -72,9 +71,9 @@ SM --> UC24
 SM --> UC25
 
 CS --> UC24
+CS --> UC25
 CS --> UC26
 CS --> UC27
 CS --> UC28
-CS --> UC29
 
 @enduml

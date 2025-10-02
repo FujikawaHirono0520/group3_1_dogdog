@@ -8,7 +8,7 @@
                     <mxGeometry x="71" y="61" width="30" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="XFLWg0oDXKJBOEz6R7yy-2" value="カート一覧画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-                    <mxGeometry x="207" y="61" width="80" height="68" as="geometry"/>
+                    <mxGeometry x="209" y="57" width="80" height="68" as="geometry"/>
                 </mxCell>
                 <mxCell id="XFLWg0oDXKJBOEz6R7yy-3" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.004;entryY=0.525;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="XFLWg0oDXKJBOEz6R7yy-1" target="XFLWg0oDXKJBOEz6R7yy-2" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -23,7 +23,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="XFLWg0oDXKJBOEz6R7yy-5" value="ログイン状態の確認" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
-                    <mxGeometry x="407" y="133" width="70" height="80" as="geometry"/>
+                    <mxGeometry x="410" y="58" width="70" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="XFLWg0oDXKJBOEz6R7yy-8" value="「購入」を選択" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="112" y="64" width="91" height="30" as="geometry"/>
@@ -31,7 +31,7 @@
                 <mxCell id="XFLWg0oDXKJBOEz6R7yy-13" value="クレジットカード番号入力画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
                     <mxGeometry x="203" y="163" width="84" height="67" as="geometry"/>
                 </mxCell>
-                <mxCell id="XFLWg0oDXKJBOEz6R7yy-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.224;exitY=0.95;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.841;entryY=0.075;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="XFLWg0oDXKJBOEz6R7yy-5" target="XFLWg0oDXKJBOEz6R7yy-13" edge="1">
+                <mxCell id="XFLWg0oDXKJBOEz6R7yy-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.224;exitY=0.95;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.972;entryY=0.284;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="XFLWg0oDXKJBOEz6R7yy-5" target="XFLWg0oDXKJBOEz6R7yy-13" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="373" y="288" as="sourcePoint"/>
                         <mxPoint x="423" y="238" as="targetPoint"/>
@@ -53,7 +53,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="XFLWg0oDXKJBOEz6R7yy-22" value="クレジットカード番号を入力&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="89" y="238" width="70" height="24" as="geometry"/>
+                    <mxGeometry x="103" y="169" width="70" height="24" as="geometry"/>
                 </mxCell>
                 <mxCell id="XFLWg0oDXKJBOEz6R7yy-23" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.771;exitY=0.963;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.124;entryY=0.263;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="XFLWg0oDXKJBOEz6R7yy-17" target="XFLWg0oDXKJBOEz6R7yy-24" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -148,19 +148,16 @@
                         <mxPoint x="703" y="480" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="4" value="Text" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="619" y="76" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="5" value="注文情報の作成" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+                <mxCell id="5" value="注文情報の作成" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
                     <mxGeometry x="649" y="559" width="70" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="" style="endArrow=classic;html=1;exitX=1.024;exitY=0.529;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.548;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="5" target="TAJ6lhDx1A0uZQImCwMc-3">
+                <mxCell id="6" value="" style="endArrow=classic;html=1;exitX=1.024;exitY=0.529;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.548;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="5" target="TAJ6lhDx1A0uZQImCwMc-3" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="677" y="543" as="sourcePoint"/>
                         <mxPoint x="727" y="493" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="7" value="" style="endArrow=classic;html=1;exitX=0.948;exitY=0.271;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.282;entryY=1.05;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="5" target="XFLWg0oDXKJBOEz6R7yy-30">
+                <mxCell id="7" value="" style="endArrow=classic;html=1;exitX=0.948;exitY=0.271;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.282;entryY=1.05;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="5" target="XFLWg0oDXKJBOEz6R7yy-30" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="677" y="543" as="sourcePoint"/>
                         <mxPoint x="727" y="493" as="targetPoint"/>

@@ -10,36 +10,35 @@ actor カスタマーサポート as CS
 
 rectangle BBサイト {
   usecase "顧客アカウント作成" as UC1
-  usecase "顧客情報を変更する" as UC2
-  usecase "ログインする" as UC3
-  usecase "ログアウトする" as UC4
-  usecase "退会する" as UC5
-  usecase "商品を参照する" as UC6
-  usecase "カートに追加する" as UC7
-  usecase "カートを閲覧する" as UC8
-  usecase "カートから削除する" as UC9
-  usecase "商品を購入する" as UC10
-  usecase "注文履歴を確認する" as UC11
-  usecase "注文をキャンセルする" as UC12
-  usecase "商品を返品する" as UC13
+  usecase "顧客情報を参照する" as UC2
+  usecase "顧客情報を変更する" as UC3
+  usecase "ログインする" as UC4
+  usecase "ログアウトする" as UC5
+  usecase "退会する" as UC6
+  usecase "商品情報を閲覧する" as UC7
+  usecase "カートに追加する" as UC8
+  usecase "カートを閲覧する" as UC9
+  usecase "カートから削除する" as UC10
+  usecase "商品を購入する" as UC11
+  usecase "注文履歴を閲覧する" as UC12
+  usecase "注文をキャンセルする" as UC13
+  usecase "商品を返品する" as UC14
 }
 
 rectangle 注文・在庫管理サイト {
-  usecase "管理サイトアカウント作成" as UC14
-  usecase "アカウントの閲覧" as UC15
-  usecase "アカウント権限の変更" as UC16
-  usecase "アカウントの停止" as UC17
-  usecase "商品情報を登録する" as UC18
-  usecase "商品情報を更新する" as UC19
-  usecase "商品情報を削除する" as UC20
-  usecase "商品を発送する" as UC21
-  usecase "商品情報を参照する" as UC22
-  usecase "注文情報を印刷する" as UC23
-  usecase "注文情報を閲覧する" as UC24
-  usecase "注文情報を変更する" as UC25
-  usecase "返金する" as UC26
-  usecase "返品を受け付ける" as UC27
-  usecase "決済履歴を確認する" as UC28
+  usecase "管理サイトアカウント作成" as UC15
+  usecase "アカウントの閲覧" as UC16
+  usecase "アカウント権限の変更" as UC17
+  usecase "アカウントの停止" as UC18
+  usecase "商品情報を登録する" as UC19
+  usecase "商品情報を変更する" as UC20
+  usecase "商品情報を削除する" as UC21
+  usecase "商品を発送する" as UC22
+  usecase "商品情報を閲覧する" as UC23
+  usecase "注文情報を印刷する" as UC24
+  usecase "注文情報を閲覧する" as UC25
+  usecase "注文情報を変更する" as UC26
+  usecase "決済履歴を閲覧する" as UC27
 }
 
 U --> UC1
@@ -55,13 +54,13 @@ U --> UC10
 U --> UC11
 U --> UC12
 U --> UC13
+U --> UC14
 
-M --> UC14
 M --> UC15
 M --> UC16
 M --> UC17
+M --> UC18
 
-SM --> UC18
 SM --> UC19
 SM --> UC20
 SM --> UC21
@@ -69,11 +68,10 @@ SM --> UC22
 SM --> UC23
 SM --> UC24
 SM --> UC25
+SM --> UC26
 
-CS --> UC24
 CS --> UC25
 CS --> UC26
 CS --> UC27
-CS --> UC28
 
 @enduml

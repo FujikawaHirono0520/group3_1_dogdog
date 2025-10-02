@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="cugUsBRw9R_G6k15aubC" name="ページ1">
-        <mxGraphModel dx="509" dy="419" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="746" dy="419" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -27,12 +27,12 @@
                         <mxPoint x="695" y="90" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="9" value="「発送準備」を選択" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="8" vertex="1" connectable="0">
+                <mxCell id="9" value="「出荷準備」を選択" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="8" vertex="1" connectable="0">
                     <mxGeometry x="-0.018" relative="1" as="geometry">
                         <mxPoint x="-3" y="-20" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="11" value="発送処理&lt;div&gt;画面を表示&lt;/div&gt;" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                <mxCell id="11" value="出荷準備&lt;br&gt;&lt;div&gt;画面を表示&lt;/div&gt;" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
                     <mxGeometry x="420" y="20" width="70" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="" style="endArrow=classic;html=1;" parent="1" source="3" target="11" edge="1">
@@ -52,7 +52,7 @@
                 </mxCell>
                 <mxCell id="30" value="処理成功" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="16">
                     <mxGeometry x="0.2769" y="-4" relative="1" as="geometry">
-                        <mxPoint x="29" as="offset"/>
+                        <mxPoint x="34" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="17" value="" style="endArrow=classic;html=1;" parent="1" source="11" target="14" edge="1">
@@ -61,7 +61,7 @@
                         <mxPoint x="705" y="100" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="19" value="発送処理" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+                <mxCell id="19" value="出荷準備&lt;div&gt;処理&lt;/div&gt;" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
                     <mxGeometry x="420" y="150" width="70" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="" style="endArrow=classic;html=1;" edge="1" parent="1" source="14" target="19">
@@ -84,29 +84,8 @@
                         <mxPoint y="-34" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="26" value="" style="endArrow=classic;html=1;" edge="1" parent="1" source="19" target="14">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="340" y="310" as="sourcePoint"/>
-                        <mxPoint x="330" y="280" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="455" y="280"/>
-                            <mxPoint x="370" y="280"/>
-                            <mxPoint x="270" y="280"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="27" value="処理失敗" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="26">
-                    <mxGeometry x="0.0596" y="4" relative="1" as="geometry">
-                        <mxPoint x="46" y="-14" as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="28" value="エラーメッセージを表示" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="26">
-                    <mxGeometry x="0.5789" y="-2" relative="1" as="geometry">
-                        <mxPoint x="-80" y="-18" as="offset"/>
-                    </mxGeometry>
-                </mxCell>
                 <mxCell id="29" value="&lt;div&gt;注文データ&lt;/div&gt;&lt;div&gt;一覧画面&lt;/div&gt;" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-                    <mxGeometry x="405" y="360" width="100" height="80" as="geometry"/>
+                    <mxGeometry x="220" y="290" width="100" height="80" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

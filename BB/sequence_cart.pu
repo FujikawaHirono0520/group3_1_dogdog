@@ -10,7 +10,7 @@ boundary 商品一覧画面 as B2
 boundary カート一覧画面 as B3
 control 認証 as C1
 control メッセージ表示 as C2
-entity BB管理システム as E
+entity 商品DB as E
 
 user -> B1: 「カートに追加」を選択
 activate B1
@@ -21,13 +21,13 @@ C1 -> E: 商品情報の確認・保存()
 deactivate C1
 activate E
 
-alt 商品情報に不備あり
-    E -> C2: 認証失敗
+alt 在庫なし
+    E -> C2: 対象の商品の在庫数0
     activate C2
-    C2 -> B1: 「カートへの追加に失敗しました」バナー表示
+    C2 -> B1: 「この商品は在庫がありません」バナー表示
     deactivate C1
 else 商品が削除済み
-    E -> C2: 認証失敗
+    E -> C2: 対象の商品なし
     C2 -> B2: 「この商品は販売不可の商品です」バナー表示
     activate B2
     deactivate C1

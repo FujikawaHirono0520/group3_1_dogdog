@@ -35,10 +35,6 @@ activate System
 System --> Process: 処理結果
 deactivate System
 
-alt 処理失敗
-    Process --> Sending: エラーメッセージを表示()
-end
-
 Process --> List: 注文データ一覧画面を表示()
 deactivate Process
 

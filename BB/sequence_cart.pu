@@ -13,7 +13,7 @@ control 商品情報の反映 as C2
 control メッセージ表示 as C3
 entity 注文・在庫管理システム as E
 
-A -> B1: 「名前の変更」を選択()
+A -> B1: 「カートに追加する」を選択()
 activate B1
 
 B1 -> C1: 現在の名前を取得()

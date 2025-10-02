@@ -21,7 +21,7 @@ activate Menu
 Menu -> Display
 
 activate Display
-Display -> Sending: 出荷準備画面を表示
+Display -> Sending: 出荷準備画面を表示()
 deactivate Menu
 deactivate Display
 
@@ -29,21 +29,21 @@ activate Sending
 Sending -> Process: 出荷準備を完了するを選択
 
 activate Process
-Process -> System: ステータスを「集荷待ち」に変更
+Process -> System: ステータスを「集荷待ち」に変更()
 
 activate System
 System --> Process: 処理結果
 deactivate System
 
 alt 処理失敗
-    Process --> Sending: エラーメッセージを表示
+    Process --> Sending: エラーメッセージを表示()
 end
 
-Process --> List: 注文データ一覧画面を表示
+Process --> List: 注文データ一覧画面を表示()
 deactivate Process
 
 activate List
 deactivate Sending
-List --> Admin: 出荷準備完了画面を表示
+List --> Admin: 出荷準備完了画面を表示()
 
 @enduml

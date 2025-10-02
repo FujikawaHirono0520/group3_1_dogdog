@@ -1,0 +1,89 @@
+@startuml
+' アクターと画面を上部にまとめて定義
+actor 顧客
+boundary "カート一覧画面" as CartScreen
+control "ログイン状態の確認" as LoginCheck
+boundary "ログイン画面" as LoginScreen
+boundary "クレジットカード番号入力画面" as CardInputScreen
+control "決済APIに情報を送信" as PaymentAPISend
+control "決済の成功判定" as PaymentCheck
+boundary "決済完了画面" as CompleteScreen
+boundary "エラーメッセージ表示" as ErrorDisplay
+
+' 既存のサービスとリポジトリ
+entity "BB販売システム" as BBSystem 
+
+== 購入開始とログイン確認 ==
+顧客 -> CartScreen : 「購入」を選択 
+CartScreen -> LoginCheck : ログイン状態確認
+
+alt 未ログイン状態だった場合 
+    LoginCheck -> LoginScreen : ログイン画面を表示
+    顧客 -> LoginScreen : ログイン情報を入力 
+    LoginScreen --> CartScreen : カート一覧画面に戻る 
+else ログイン状態だった場合 
+    LoginCheck -> CardInputScreen : クレジットカード番号入力画面へ
+end
+
+== 決済情報入力と購入リクエスト ==
+顧客 -> CardInputScreen : クレジットカード番号を入力        
+CardInputScreen -> PaymentAPISend : 購入リクエスト送信
+
+PurchaseController -> PurchaseService : 購入処理依頼(商品情報, 顧客情報) 
+activate PurchaseService
+
+PurchaseService -> InventoryService : 在庫確認(商品ID, 数量) 
+activate InventoryService
+InventoryService --> PurchaseService : 在庫あり/なし 
+deactivate InventoryServic
+
+alt 在庫あり 
+    PurchaseService -> PaymentService : 決済処理(顧客情報, 金額) 
+    activate PaymentService
+    PaymentService -> PaymentAPISend : 決済APIに情報を送信 
+    activate PaymentAPISend
+    PaymentAPISend --> PaymentService : 決済結果
+    deactivate PaymentAPISend
+    PaymentService --> PurchaseService : 決済結果(成功/失敗)
+    deactivate PaymentService
+    PurchaseService -> PaymentCheck : 決済の成功判定
+
+    alt 決済成功
+        PaymentCheck -> PurchaseService : 成功
+
+        PurchaseService -> OrderRepository : 注文情報登録
+        activate OrderRepository
+        OrderRepository --> PurchaseService : 登録完了
+        deactivate OrderRepository
+
+        PurchaseService -> BBSystem : 在庫数の変更 (Inventory Serviceを介する)
+        PurchaseService -> BBSystem : カート内のデータクリア
+
+        PurchaseService --> PurchaseController : 購入完了
+        deactivate PurchaseService
+
+        PurchaseController --> CompleteScreen : 購入完了メッセージ表示
+        deactivate PurchaseController
+        CompleteScreen --> 顧客 : 決済完了画面表示
+
+    else 決済失敗
+        PaymentCheck -> PurchaseController : 失敗
+        
+        ' エラー処理のフローを組み込む
+        PurchaseController -> BBSystem : エラーコードに対応したメッセージを取得
+        BBSystem --> PurchaseController : エラーメッセージ
+
+        PurchaseController --> ErrorDisplay : エラーメッセージ表示
+        deactivate PurchaseController
+        ErrorDisplay --> 顧客 : エラーメッセージ表示
+    end
+
+else 在庫なし
+    PurchaseService --> PurchaseController : 在庫不足レスポンス
+    deactivate PurchaseService
+
+    PurchaseController --> ErrorDisplay : 在庫不足メッセージ表示
+    deactivate PurchaseController
+    ErrorDisplay --> 顧客 : 在庫不足メッセージ表示
+end
+@enduml

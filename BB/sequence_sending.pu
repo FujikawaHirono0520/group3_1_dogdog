@@ -1,0 +1,49 @@
+@startuml .
+
+hide footbox
+skinparam BoundaryBackgroundColor #D5E8D4
+skinparam ControlBackgroundColor #F8CECC
+skinparam EntityBackgroundColor #DAE8FC
+
+actor 注文在庫管理者 as Admin
+boundary 在庫管理メニュー画面 as Menu
+boundary 出荷準備画面 as Sending
+boundary 注文データ一覧画面 as List
+control 出荷準備画面表示 as Display
+control 出荷準備処理 as Process
+entity BB販売システム as System
+' database 注文データテーブル as OrderDB?
+
+activate Admin
+Admin -> Menu: 出荷準備を選択
+
+activate Menu
+Menu -> Display
+
+activate Display
+Display -> Sending: 出荷準備画面を表示
+deactivate Menu
+deactivate Display
+
+activate Sending
+Sending -> Process: 出荷準備を完了するを選択
+
+activate Process
+Process -> System: ステータスを「集荷待ち」に変更
+
+activate System
+System --> Process: 処理結果
+deactivate System
+
+alt 処理失敗
+    Process --> Sending: エラーメッセージを表示
+end
+
+Process --> List: 注文データ一覧画面を表示
+deactivate Process
+
+activate List
+deactivate Sending
+List --> Admin: 出荷準備完了画面を表示
+
+@enduml

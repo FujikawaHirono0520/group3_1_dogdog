@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="sZ1b5ORBy8N2IJUaAmFC" name="ページ1">
-        <mxGraphModel dx="1212" dy="698" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="829" dy="466" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -99,9 +99,9 @@
                         <mxPoint x="540" y="290" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="31" value="承認失敗" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="30" vertex="1" connectable="0">
+                <mxCell id="31" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;在庫なし、または商品がない場合&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="30" vertex="1" connectable="0">
                     <mxGeometry x="-0.1368" y="-2" relative="1" as="geometry">
-                        <mxPoint x="-8" y="4" as="offset"/>
+                        <mxPoint x="-8" y="19" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="32" value="" style="endArrow=classic;html=1;" parent="1" source="29" target="3" edge="1">
@@ -110,7 +110,7 @@
                         <mxPoint x="540" y="290" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="33" value="&lt;div&gt;商品情報の不備の場合&lt;/div&gt;「カートの追加に失敗しました」" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="32" vertex="1" connectable="0">
+                <mxCell id="33" value="&lt;div&gt;在庫なしの場合&lt;/div&gt;「この商品は在庫がありません」" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="32" vertex="1" connectable="0">
                     <mxGeometry x="-0.0623" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>

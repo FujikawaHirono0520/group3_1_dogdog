@@ -41,6 +41,7 @@ class 注文データ {
 
 class 注文詳細データ {
     - 注文詳細ID: String
+    - 注文ID: String
     - 商品ID: String
     - 注文数: int
     - ステータス: {1:入金済, 2:出荷済, 3:キャンセル}

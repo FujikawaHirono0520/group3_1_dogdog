@@ -2,14 +2,12 @@
 title 商品の購入 - シーケンス図
 
 hide footbox
-' autonumber は削除
-
-' 参加者の定義 (ユースケース図の要素に対応)
+' 参加者の定義 (順序変更: 顧客 -> カート一覧画面 -> ログイン状態確認...)
 actor 顧客
 boundary "カート一覧画面" as CartView
+control "ログイン状態の確認" as LoginCheck 
 boundary "クレジットカード番号入力画面" as CardInputView
 boundary "決済完了画面" as CompleteView
-control "ログイン状態の確認" as LoginCheck
 control "決済APIに情報を送信" as PaymentSend
 control "決済の成功判定" as PaymentResult
 control "エラーコードの処理" as ErrorProcess
@@ -24,10 +22,10 @@ participant "決済API" as ExternalAPI #LightBlue
 activate CartView
 
 CartView -> LoginCheck : ログイン状態確認要求
-deactivate CartView
 activate LoginCheck
 LoginCheck -> CardInputView : ログイン済みのため画面遷移
 deactivate LoginCheck
+deactivate CartView
 activate CardInputView
 
 顧客 -> CardInputView : クレジットカード番号を入力
@@ -74,7 +72,7 @@ alt 決済成功 (基本フロー)
     CompleteView --> 顧客 : 決済完了画面表示
     deactivate CompleteView
 
-else 決済失敗 (代替フロー)
+else 決済失敗 (代替フロー1)
     PaymentResult -> ErrorProcess : 決済失敗情報とエラーコードを受け取る
     activate ErrorProcess
     ErrorProcess -> BBSystem : エラーメッセージ取得要求
@@ -82,7 +80,7 @@ else 決済失敗 (代替フロー)
     BBSystem --> ErrorProcess : エラーメッセージ返却
     deactivate BBSystem
 
-    ErrorProcess -> CardInputView : エラーメッセージを表示、カート一覧画面へ遷移
+    ErrorProcess -> CartView : エラーメッセージを表示、カート一覧画面へ遷移
     deactivate ErrorProcess
     activate CartView
     

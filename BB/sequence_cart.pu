@@ -10,6 +10,7 @@ boundary 商品一覧画面 as B2
 boundary カート一覧画面 as B3
 control 認証 as C1
 control メッセージ表示 as C2
+control カートに追加 as C3
 entity 商品DB as E
 
 user -> B1: 「カートに追加」を選択
@@ -22,7 +23,7 @@ deactivate C1
 activate E
 
 alt 在庫なし
-    E -> C2: 対象の商品の在庫数0
+    E -> C2: 対象の商品の在庫数ゼロ
     activate C2
     C2 -> B1: 「この商品は在庫がありません」バナー表示
     deactivate C1
@@ -48,16 +49,16 @@ alt ユーザー未ログイン
 
 end
 
-E -> C2: カート追加成功
+
+E -> C3: 商品情報の受け渡し
+activate C3
+C3 -> C2: カートに追加成功
 activate C2
 C2 -> B1: 「カートに追加しました」バナー表示
 deactivate C2
-E --> B3: 商品情報送信
+C3 --> B3: 商品情報送信
 activate B3
-deactivate B3
-deactivate E
-deactivate C1
-deactivate B1
+deactivate C3
 
 
 @enduml

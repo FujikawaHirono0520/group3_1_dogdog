@@ -30,6 +30,7 @@ skinparam componentStyle rectangle
 [図書] <|-- [書籍]
 [図書] <|-- [雑誌]
 
-[制約] o-- [上限冊数]
+[制約] <|-- [上限冊数]
+[制約] <|-- [貸し出し可能図書分類]
 
 @enduml

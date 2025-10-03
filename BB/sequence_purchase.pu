@@ -1,5 +1,8 @@
 @startuml
 title 商品の購入 - シーケンス図
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
 
 hide footbox
 
@@ -7,7 +10,6 @@ actor 顧客
 boundary "カート一覧画面" as CartView
 control "ログイン状態の確認" as LoginCheck 
 boundary "クレジットカード番号入力画面" as CardInputView
-boundary "決済完了画面" as CompleteView
 control "決済APIに情報を送信" as PaymentSend
 control "決済の成功判定" as PaymentResult
 control "エラーコードの処理" as ErrorProcess
@@ -15,7 +17,7 @@ control "注文情報の作成" as CreateOrder
 control "在庫数の変更" as ChangeStock
 control "カート内のデータクリア" as ClearCart
 entity "BB販売システム" as BBSystem
-
+boundary "決済完了画面" as CompleteView
 顧客 -> CartView : 「購入」を選択
 activate CartView
 

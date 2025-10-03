@@ -5,41 +5,47 @@ skinparam BoundaryBackgroundColor #D5E8D4
 skinparam ControlBackgroundColor #F8CECC
 skinparam EntityBackgroundColor #DAE8FC
 
-actor 注文在庫管理者 as Admin
+actor 注文在庫管理者 as User
 boundary 在庫管理メニュー画面 as Menu
 boundary 出荷準備画面 as Sending
 boundary 注文データ一覧画面 as List
 control 出荷準備画面表示 as Display
 control 出荷準備処理 as Process
 ' entity BB販売システム as System
-entity 注文データ as OrderDB
+entity 注文詳細DB as OrderDetailDB
+entity 注文DB as OrderDB
 
-activate Admin
-Admin -> Menu: 出荷準備を選択
+User -> Menu: 「出荷準備」を選択
 
 activate Menu
 Menu -> Display
 
 activate Display
-Display -> Sending: 出荷準備画面を表示()
+Display -> OrderDB: 出荷準備対象の注文データを取得()
+
+activate OrderDB
+OrderDB --> Display: 注文データ一覧
+deactivate OrderDB
+
+Display --> Sending: 出荷準備画面表示()
 deactivate Menu
 deactivate Display
 
 activate Sending
-Sending -> Process: 出荷準備を完了するを選択
+User -> Sending: 「出荷準備を完了する」を選択
+Sending -> Process: 
 
 activate Process
-Process -> OrderDB: ステータスを「集荷待ち」に変更()
+Process -> OrderDetailDB: ステータスを「集荷待ち」に変更()
 
-activate OrderDB
-OrderDB --> Process: 処理結果
-deactivate OrderDB
+activate OrderDetailDB
+OrderDetailDB --> Process: 処理結果
+deactivate OrderDetailDB
 
 Process --> List: 注文データ一覧画面を表示()
 deactivate Process
 
 activate List
 deactivate Sending
-List --> Admin: 出荷準備完了画面を表示()
 
 @enduml

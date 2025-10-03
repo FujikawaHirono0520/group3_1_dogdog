@@ -6,14 +6,14 @@ skinparam ControlBackgroundColor #F8CECC
 skinparam EntityBackgroundColor #DAE8FC
 
 actor 注文在庫管理者 as User
-boundary 在庫管理メニュー画面stock as Menu
-boundary 出荷準備画面 as Sending
-boundary 注文データ一覧画面 as List
-control 出荷準備画面表示 as Display
-control 出荷準備処理 as Process
+boundary stockMenu.jsp as Menu
+boundary sendReady.jsp as Sending
+boundary OrderList.jsp as List
+control SendReady.java as Display
+control SendReadyProcess.java as Process
 ' entity BB販売システム as System
-entity 注文詳細DB as OrderDetailDB
-entity 注文DB as OrderDB
+entity OrderDetail.java as OrderDetailDB
+entity Order.java as OrderDB
 
 User -> Menu: 「出荷準備」を選択
 

@@ -8,66 +8,67 @@ hide footbox
 
 actor 顧客
 boundary "カート一覧画面" as CartView
-control "ログイン状態の確認" as LoginCheck 
 boundary "クレジットカード番号入力画面" as CardInputView
-entity "決済API" as PaymentAPI
-control "注文情報の作成" as CreateOrder
-control "在庫数の変更" as ChangeStock
-control "カート内のデータクリア" as ClearCart
-entity "エラーDB" as ErrorDataBase
-entity "カートDB" as CartDataBase
-entity "商品DB" as GoodsDataBase
-entity "注文DB" as OrderDataBase
 boundary "決済完了画面" as CompleteView
+control "決済APIを実行" as APIExecution
+control "購入後処理" as PostPurchase
+entity "決済API" as PaymentAPI
+entity "エラーDB" as ErrorDataBase
+entity "注文DB" as OrderDataBase
+entity "商品DB" as GoodsDataBase
+entity "カートDB" as CartDataBase
 顧客 -> CartView : 「購入」を選択
 activate CartView
 
-CartView -> LoginCheck : ログイン状態確認要求()
-activate LoginCheck
-LoginCheck -> CardInputView : ログイン済みのため画面遷移()
-deactivate LoginCheck
+CartView -> CardInputView : ログイン状態確認要求()
 deactivate CartView
 activate CardInputView
 
 顧客 -> CardInputView : クレジットカード番号を入力
-CardInputView -> PaymentAPI : 決済リクエスト送信()
+
+CardInputView -> APIExecution : 起動()
 deactivate CardInputView
+activate APIExecution
+
+APIExecution -> PaymentAPI : 決済リクエスト送信()
 activate PaymentAPI
 
-PaymentAPI -> DataBase : 決済の判定結果を送信()
+PaymentAPI --> APIExecution : 決済の判定結果
+
+
 deactivate PaymentAPI
-activate DataBase
 alt 決済失敗 (代替フロー1)
-    DataBase -> CartView : エラーメッセージを表示、カート一覧画面へ遷移()
+
+    APIExecution -> ErrorDataBase : エラーメッセージ取得()
+    activate ErrorDataBase
+    ErrorDataBase --> APIExecution : エラーメッセージ
+    deactivate ErrorDataBase
+    APIExecution -> CartView : エラーメッセージを表示、カート一覧画面へ遷移()
     activate CartView
     
     CartView --> 顧客 : カート一覧画面表示
     deactivate CartView
 end
-    DataBase -> CreateOrder : 注文情報作成()
-    deactivate DataBase
-    activate CreateOrder
-    CreateOrder -> DataBase : 注文情報登録()
-    activate DataBase
-    DataBase --> CreateOrder : 登録完了
+    APIExecution -> PostPurchase : 起動()
+    deactivate APIExecution
+    activate PostPurchase
+    PostPurchase -> OrderDataBase : 注文情報登録()
+    activate OrderDataBase
+    OrderDataBase --> PostPurchase : 登録完了
+    deactivate OrderDataBase
 
-    CreateOrder -> ChangeStock : 在庫数から購入分を引く()
-    deactivate CreateOrder
-    activate ChangeStock
-    ChangeStock -> DataBase : 在庫数更新()
-    DataBase --> ChangeStock : 更新完了
-    deactivate DataBase
-    
-    ChangeStock -> ClearCart : カート内商品情報削除()
-    deactivate ChangeStock
-    activate ClearCart
-    ClearCart -> DataBase : カート情報削除()
-    activate DataBase
-    DataBase --> ClearCart : 削除完了
-    deactivate DataBase
+    PostPurchase -> GoodsDataBase : 在庫数更新()
+    activate GoodsDataBase
+    GoodsDataBase --> PostPurchase : 更新完了
+    deactivate GoodsDataBase
 
-    ClearCart -> CompleteView : 決済完了画面遷移
-    deactivate ClearCart
+    PostPurchase -> CartDataBase : カートの削除()
+    activate CartDataBase
+    CartDataBase --> PostPurchase : 削除完了
+    deactivate CartDataBase
+
+    PostPurchase -> CompleteView : 決済完了画面遷移
+    deactivate PostPurchase
     activate CompleteView
     
     CompleteView --> 顧客 : 決済完了画面表示

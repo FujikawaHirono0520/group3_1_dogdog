@@ -1,13 +1,15 @@
 @startuml
 title 商品の購入 - シーケンス図
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
 
 hide footbox
-' 参加者の定義 (順序変更: 顧客 -> カート一覧画面 -> ログイン状態確認...)
+
 actor 顧客
 boundary "カート一覧画面" as CartView
 control "ログイン状態の確認" as LoginCheck 
 boundary "クレジットカード番号入力画面" as CardInputView
-boundary "決済完了画面" as CompleteView
 control "決済APIに情報を送信" as PaymentSend
 control "決済の成功判定" as PaymentResult
 control "エラーコードの処理" as ErrorProcess
@@ -15,76 +17,68 @@ control "注文情報の作成" as CreateOrder
 control "在庫数の変更" as ChangeStock
 control "カート内のデータクリア" as ClearCart
 entity "BB販売システム" as BBSystem
-participant "決済API" as ExternalAPI #LightBlue
-
+boundary "決済完了画面" as CompleteView
 顧客 -> CartView : 「購入」を選択
 activate CartView
 
-CartView -> LoginCheck : ログイン状態確認要求
+CartView -> LoginCheck : ログイン状態確認要求()
 activate LoginCheck
-LoginCheck -> CardInputView : ログイン済みのため画面遷移
+LoginCheck -> CardInputView : ログイン済みのため画面遷移()
 deactivate LoginCheck
 deactivate CartView
 activate CardInputView
 
 顧客 -> CardInputView : クレジットカード番号を入力
-CardInputView -> PaymentSend : 決済リクエスト準備
+CardInputView -> PaymentSend : 決済リクエスト送信()
 deactivate CardInputView
 activate PaymentSend
 
-PaymentSend -> ExternalAPI : 決済リクエスト送信
-activate ExternalAPI
-ExternalAPI --> PaymentSend : 決済成功応答
-deactivate ExternalAPI
-
-PaymentSend -> PaymentResult : 決済成功判定
+PaymentSend -> PaymentResult : 決済の成功、失敗判定を送信()
 deactivate PaymentSend
 activate PaymentResult
-
-alt 決済成功 (基本フロー)
-    PaymentResult -> CreateOrder : 注文情報作成
-    activate CreateOrder
-    CreateOrder -> BBSystem : 注文情報登録
-    activate BBSystem
-    BBSystem --> CreateOrder : 登録完了
-
-    CreateOrder -> ChangeStock : 在庫数から購入分を引く
-    deactivate CreateOrder
-    activate ChangeStock
-    ChangeStock -> BBSystem : 在庫数更新
-    BBSystem --> ChangeStock : 更新完了
-    deactivate BBSystem
+alt 決済失敗 (代替フロー1)
+    PaymentResult -> ErrorProcess : 決済失敗情報とエラーコードを受け取る()
     
-    ChangeStock -> ClearCart : カート内商品情報削除
-    deactivate ChangeStock
-    activate ClearCart
-    ClearCart -> BBSystem : カート情報削除
-    activate BBSystem
-    BBSystem --> ClearCart : 削除完了
-    deactivate BBSystem
-    
-    ClearCart -> CompleteView : 決済完了画面表示
-    deactivate ClearCart
-    activate CompleteView
-    
-    CompleteView --> 顧客 : 決済完了画面表示
-    deactivate CompleteView
-
-else 決済失敗 (代替フロー1)
-    PaymentResult -> ErrorProcess : 決済失敗情報とエラーコードを受け取る
-    deactivate PaymentResult
     activate ErrorProcess
-    ErrorProcess -> BBSystem : エラーメッセージ取得要求
+    ErrorProcess -> BBSystem : エラーメッセージ取得要求()
     activate BBSystem
     BBSystem --> ErrorProcess : エラーメッセージ返却
     deactivate BBSystem
 
-    ErrorProcess -> CartView : エラーメッセージを表示、カート一覧画面へ遷移
+    ErrorProcess -> CartView : エラーメッセージを表示、カート一覧画面へ遷移()
     deactivate ErrorProcess
     activate CartView
     
     CartView --> 顧客 : カート一覧画面表示
     deactivate CartView
 end
+    PaymentResult -> CreateOrder : 注文情報作成()
+    deactivate PaymentResult
+    activate CreateOrder
+    CreateOrder -> BBSystem : 注文情報登録()
+    activate BBSystem
+    BBSystem --> CreateOrder : 登録完了
+
+    CreateOrder -> ChangeStock : 在庫数から購入分を引く()
+    deactivate CreateOrder
+    activate ChangeStock
+    ChangeStock -> BBSystem : 在庫数更新()
+    BBSystem --> ChangeStock : 更新完了
+    deactivate BBSystem
+    
+    ChangeStock -> ClearCart : カート内商品情報削除()
+    deactivate ChangeStock
+    activate ClearCart
+    ClearCart -> BBSystem : カート情報削除()
+    activate BBSystem
+    BBSystem --> ClearCart : 削除完了
+    deactivate BBSystem
+
+    ClearCart -> CompleteView : 決済完了画面遷移
+    deactivate ClearCart
+    activate CompleteView
+    
+    CompleteView --> 顧客 : 決済完了画面表示
+    deactivate CompleteView
 
 @enduml

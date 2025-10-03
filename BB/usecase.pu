@@ -30,7 +30,7 @@ rectangle 注文・在庫管理サイト {
   usecase "アカウントの閲覧" as UC16
   usecase "アカウント権限の変更" as UC17
   usecase "アカウントの停止" as UC18
-  usecase "商品情報を登録する" as UC19
+  usecase "商品情報を作成する" as UC19
   usecase "商品情報を変更する" as UC20
   usecase "商品情報を削除する" as UC21
   usecase "商品を発送する" as UC22

@@ -10,12 +10,14 @@ actor 顧客
 boundary "カート一覧画面" as CartView
 control "ログイン状態の確認" as LoginCheck 
 boundary "クレジットカード番号入力画面" as CardInputView
-control "決済APIに情報を送信" as PaymentSend
-control "決済の成功判定" as PaymentResult
+entity "決済API" as PaymentAPI
 control "注文情報の作成" as CreateOrder
 control "在庫数の変更" as ChangeStock
 control "カート内のデータクリア" as ClearCart
-entity "データベース" as DataBase
+entity "エラーDB" as ErrorDataBase
+entity "カートDB" as CartDataBase
+entity "商品DB" as GoodsDataBase
+entity "注文DB" as OrderDataBase
 boundary "決済完了画面" as CompleteView
 顧客 -> CartView : 「購入」を選択
 activate CartView
@@ -28,27 +30,22 @@ deactivate CartView
 activate CardInputView
 
 顧客 -> CardInputView : クレジットカード番号を入力
-CardInputView -> PaymentSend : 決済リクエスト送信()
+CardInputView -> PaymentAPI : 決済リクエスト送信()
 deactivate CardInputView
-activate PaymentSend
+activate PaymentAPI
 
-PaymentSend -> PaymentResult : 決済の成功、失敗判定を送信()
-deactivate PaymentSend
-activate PaymentResult
+PaymentAPI -> DataBase : 決済の判定結果を送信()
+deactivate PaymentAPI
+activate DataBase
 alt 決済失敗 (代替フロー1)
-    PaymentResult -> DataBase : 決済失敗情報とエラーコード送信()
-    activate DataBase
-    
-
     DataBase -> CartView : エラーメッセージを表示、カート一覧画面へ遷移()
-    deactivate DataBase
     activate CartView
     
     CartView --> 顧客 : カート一覧画面表示
     deactivate CartView
 end
-    PaymentResult -> CreateOrder : 注文情報作成()
-    deactivate PaymentResult
+    DataBase -> CreateOrder : 注文情報作成()
+    deactivate DataBase
     activate CreateOrder
     CreateOrder -> DataBase : 注文情報登録()
     activate DataBase

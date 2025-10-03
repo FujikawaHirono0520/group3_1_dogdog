@@ -7,57 +7,49 @@ skinparam entityBackgroundColor   #DAE8FC
 actor 顧客 as user
 boundary 商品詳細画面 as B1
 boundary 商品一覧画面 as B2
-boundary カート一覧画面 as B3
-control 認証 as C1
-control メッセージ表示 as C2
+' control 認証 as C1
+' control メッセージ表示 as C2
 control カートに追加 as C3
-entity 商品DB as E
+entity 商品DB as E1
+entity カートDB as E2
 
 user -> B1: 「カートに追加」を選択
 activate B1
 
-B1 -> C1: 商品情報を送信()
-activate C1
-C1 -> E: 商品情報の確認・保存()
-deactivate C1
-activate E
+B1 -> C3: 商品情報を送信
+activate C3
+C3 -> E1: 商品情報の確認()
+activate E1
+E1 --> C3: 在庫情報
 
-alt 在庫なし
-    E -> C2: 対象の商品の在庫数ゼロ
-    activate C2
-    C2 -> B1: 「この商品は在庫がありません」バナー表示
-    deactivate C1
-else 商品が削除済み
-    E -> C2: 対象の商品なし
-    C2 -> B2: 「この商品は販売不可の商品です」バナー表示
-    activate B2
-    deactivate C1
-    deactivate B2
-    deactivate C2
-
-end
 
 alt ユーザー未ログイン
-    B1 -> C1: 商品情報を送信()
-    activate C1
-    C1 -> C1: トークン付き商品データをcookie保存()
-    C1 -> B1: 「カートに追加しました」バナー表示
-    C1 -> B3: 商品情報送信
-    activate B3
-    deactivate C1
-    deactivate B3
+    C3 -> C3: トークン付き商品データをcookie保存()
+    C3 --> B1: 「カートに追加しました」バナー表示
+
+end
+
+alt 在庫なし
+    E1 --> C3: 在庫数０
+    
+    C3 --> B1: 「この商品は在庫がありません」バナー表示
+else 商品が削除済み
+    E1 --> C3: 該当の商品なし
+    C3 --> B2: 「この商品は販売不可の商品です」バナー表示
+    activate B2
+    deactivate B2
 
 end
 
 
-E -> C3: 商品情報の受け渡し
-activate C3
-C3 -> C2: カートに追加成功
-activate C2
-C2 -> B1: 「カートに追加しました」バナー表示
-deactivate C2
-C3 --> B3: 商品情報送信
-activate B3
+E1 --> C3: 商品情報
+deactivate E1
+C3 -> E2: カートに追加()
+activate E2
+E2 --> C3
+deactivate E2
+
+C3 --> B1: 「カートに追加しました」バナー表示
 deactivate C3
 
 

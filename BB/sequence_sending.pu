@@ -6,7 +6,7 @@ skinparam ControlBackgroundColor #F8CECC
 skinparam EntityBackgroundColor #DAE8FC
 
 actor 注文在庫管理者 as User
-boundary 在庫管理メニュー画面 as Menu
+boundary 在庫管理メニュー画面stock as Menu
 boundary 出荷準備画面 as Sending
 boundary 注文データ一覧画面 as List
 control 出荷準備画面表示 as Display
@@ -27,7 +27,7 @@ activate OrderDB
 OrderDB --> Display: 注文データ一覧
 deactivate OrderDB
 
-Display --> Sending: 出荷準備画面表示()
+Display -> Sending: 出荷準備画面表示()
 deactivate Menu
 deactivate Display
 
@@ -42,7 +42,7 @@ activate OrderDetailDB
 OrderDetailDB --> Process: 処理結果
 deactivate OrderDetailDB
 
-Process --> List: 注文データ一覧画面を表示()
+Process -> List: 注文データ一覧画面を表示()
 deactivate Process
 
 activate List

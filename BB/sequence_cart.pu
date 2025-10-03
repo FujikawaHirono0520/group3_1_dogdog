@@ -4,27 +4,29 @@ skinparam boundaryBackgroundColor #D5E8D4
 skinparam controlBackgroundColor  #F8CECC
 skinparam entityBackgroundColor   #DAE8FC
 
-actor 顧客 as user
-boundary 商品詳細画面 as B1
-boundary 商品一覧画面 as B2
+actor "customer" as user
+boundary "goodsDetail.html" as B1
+boundary "goodsList.html" as B2
 ' control 認証 as C1
 ' control メッセージ表示 as C2
-control カートに追加 as C3
-entity 商品DB as E1
-entity カートDB as E2
+control "addGoods.jsp" as C3
+entity "goods.java" as E1
+entity "cart.java" as E2
 
-user -> B1: 「カートに追加」を選択
+user -> B1: 「カートに追加」を選択()
 activate B1
 
-B1 -> C3: 商品情報を送信
+B1 -> C3: 商品情報を送信()
 activate C3
-C3 -> E1: 商品情報の確認()
+' C3 -> E1: 商品情報の確認()
+C3 -> E1: getGoodsInfo()
 activate E1
 E1 --> C3: 在庫情報
 
 
 alt ユーザー未ログイン
-    C3 -> C3: トークン付き商品データをcookie保存()
+    ' C3 -> C3: トークン付き商品データをcookie保存()
+    C3 -> C3: setGoodsDataInCookie()
     C3 --> B1: 「カートに追加しました」バナー表示
 
 end
@@ -44,7 +46,8 @@ end
 
 E1 --> C3: 商品情報
 deactivate E1
-C3 -> E2: カートに追加()
+' C3 -> E2: カートに追加()
+C3 -> E2: setGoodsInfo()
 activate E2
 E2 --> C3
 deactivate E2

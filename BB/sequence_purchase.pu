@@ -17,7 +17,6 @@ control "カート内のデータクリア" as ClearCart
 entity "BB販売システム" as BBSystem
 participant "決済API" as ExternalAPI #LightBlue
 
-== 基本フロー ==
 顧客 -> CartView : 「購入」を選択
 activate CartView
 
@@ -44,7 +43,6 @@ activate PaymentResult
 
 alt 決済成功 (基本フロー)
     PaymentResult -> CreateOrder : 注文情報作成
-    deactivate PaymentResult
     activate CreateOrder
     CreateOrder -> BBSystem : 注文情報登録
     activate BBSystem
@@ -74,6 +72,7 @@ alt 決済成功 (基本フロー)
 
 else 決済失敗 (代替フロー1)
     PaymentResult -> ErrorProcess : 決済失敗情報とエラーコードを受け取る
+    deactivate PaymentResult
     activate ErrorProcess
     ErrorProcess -> BBSystem : エラーメッセージ取得要求
     activate BBSystem

@@ -1,0 +1,84 @@
+@startuml .
+skinparam classAttributeIconSize 0
+
+class Member {
+  - memberId: String
+  - name: String
+  - email: String
+}
+
+class Student {
+  - studentId: String
+  - name: String
+  - email: String
+}
+
+class Staff {
+  - staffId: String
+  - name: String
+  - email: String
+}
+
+class Reservation {
+  - memberId: String
+  - managementNumber: String
+  - reservationDate: Date
+
+  + createReservation()
+}
+
+class Rental {
+  - memberId: String
+  - managementNumber: String
+  - rentalDate: Date
+  - returnDate: Date
+  - status: {Rental, Returned}
+
+  + createrental()
+  + viewrental()
+  + updaterental()
+}
+
+class LibraryItem {
+  - managementNumber: String
+  - title: String
+  - author: String
+  - publisher: String
+  - ISBN: String
+}
+
+class Book {
+  - managementNumber: String
+  - title: String
+  - author: String
+  - publisher: String
+  - ISBN: String
+}
+
+class Magazine {
+  - managementNumber: String
+  - title: String
+  - author: String
+  - publisher: String
+  - ISBN: String
+}
+
+Member <|-- Student
+
+Member <|-- Staff
+
+LibraryItem <|-- Book
+
+LibraryItem <|-- Magazine
+
+Student "1" o-- "0..6" Rental
+
+Staff "1" o-- "0..12" Rental
+
+Member "1" o-- "0..*" Reservation
+
+Rental "0..1" o-- "1" LibraryItem
+
+Reservation "0..*" o-- "1" LibraryItem
+
+@enduml

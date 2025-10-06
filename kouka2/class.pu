@@ -5,7 +5,18 @@ class 会員{
   - 会員番号: String
   - 氏名: String
   - メールアドレス: String
-  - 分類: {学生,職員}
+}
+
+class 学生{
+  - 学生番号: String
+  - 氏名: String
+  - メールアドレス: String
+}
+
+class 職員{
+  - 職員番号: String
+  - 氏名: String
+  - メールアドレス: String
 }
 
 class 予約情報{
@@ -34,15 +45,40 @@ class 図書{
   - 著者: String
   - 出版社: String
   - ISBN: String
-  - 分類: {書籍,雑誌}
 }
 
-会員 "1..*" o-- "0..*" 貸し出し情報
+class 書籍{
+  - 管理番号: String
+  - 書名: String
+  - 著者: String
+  - 出版社: String
+  - ISBN: String
+}
+
+class 雑誌{
+  - 管理番号: String
+  - 書名: String
+  - 著者: String
+  - 出版社: String
+  - ISBN: String
+}
+
+会員 <|-- 学生
+
+会員 <|-- 職員
+
+図書 <|-- 書籍
+
+図書 <|-- 雑誌
+
+学生 "1" o-- "0..6" 貸し出し情報
+
+職員 "1" o-- "0..12" 貸し出し情報
 
 会員 "1" o-- "0..*" 予約情報
 
-図書 "1..*" o-- "0..1" 貸し出し情報
+貸し出し情報 "0..1" o-- "1" 図書
 
-図書 "1" o-- "0..*" 予約情報
+予約情報 "0..*" o-- "1" 図書
 
 @enduml

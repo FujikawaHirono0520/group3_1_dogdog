@@ -11,12 +11,14 @@ class Student {
   - studentId: String
   - name: String
   - email: String
+  - position: String
 }
 
 class Staff {
   - staffId: String
   - name: String
   - email: String
+  - position: String
 }
 
 class Reservation {
@@ -53,6 +55,7 @@ class Book {
   - author: String
   - publisher: String
   - ISBN: String
+  - class: String
 }
 
 class Magazine {
@@ -61,6 +64,7 @@ class Magazine {
   - author: String
   - publisher: String
   - ISBN: String
+  - class: String
 }
 
 Member <|-- Student

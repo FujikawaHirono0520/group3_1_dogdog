@@ -2,6 +2,9 @@
 
 ' 図の下部にある参加者名を非表示にします
 hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
 
 ' 参加者の定義
 actor 事務職員

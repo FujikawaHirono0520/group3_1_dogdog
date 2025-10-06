@@ -27,16 +27,16 @@ class Reservation {
   + createReservation()
 }
 
-class Lending {
+class Rental {
   - memberId: String
   - managementNumber: String
-  - lendingDate: Date
+  - rentalDate: Date
   - returnDate: Date
-  - status: {Lending, Returned}
+  - status: {Rental, Returned}
 
-  + createLending()
-  + viewLending()
-  + updateLending()
+  + createrental()
+  + viewrental()
+  + updaterental()
 }
 
 class LibraryItem {
@@ -71,13 +71,13 @@ LibraryItem <|-- Book
 
 LibraryItem <|-- Magazine
 
-Student "1" o-- "0..6" Lending
+Student "1" o-- "0..6" Rental
 
-Staff "1" o-- "0..12" Lending
+Staff "1" o-- "0..12" Rental
 
 Member "1" o-- "0..*" Reservation
 
-Lending "0..1" o-- "1" LibraryItem
+Rental "0..1" o-- "1" LibraryItem
 
 Reservation "0..*" o-- "1" LibraryItem
 

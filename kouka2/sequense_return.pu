@@ -1,0 +1,79 @@
+@startuml
+hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor "事務職員" as user
+boundary "メニュー画面" as B1
+boundary "返却一覧画面" as B2
+boundary "返却完了画面" as B3
+control "図書の検索" as C1
+control "返却処理" as C2
+entity "図書DB" as E1
+entity "貸し出しDB" as E2
+entity "予約DB" as E3
+entity "会員DB" as E4
+
+user -> B1: 「返却」を選択()
+activate B1
+
+B1 -> B2: 表示()
+deactivate B1
+activate B2
+
+alt 返却する図書をすべて入力し終えるまで繰り返し
+
+  B2 -> C1: 起動()
+  activate C1
+
+  C1 -> E1: 図書検索()
+  activate E1
+  E1 --> C1: 検索結果
+  deactivate E1
+
+  alt 管理番号が登録されていなかった場合
+    C1 -> B2: 「管理番号を確認してください」メッセージ表示()
+  else 図書の返却期限を過ぎていた場合
+    C1 -> B2: 「この図書は返却期限を過ぎています。注意してください」メッセージ表示()
+  else 図書が貸し出し中でなかった場合
+    C1 -> B2: 「この図書は貸し出されていません」メッセージ表示()
+  end
+
+  C1 -> B2: 図書情報追加()
+  deactivate C1
+
+end
+
+alt 返却する図書が一冊も入力されていなかった場合
+  B2 -> B2: 「返却する図書が入力されていません」メッセージ表示()
+end
+
+B2 -> C2: 起動()
+deactivate B2
+activate C2
+
+C2 -> E2: 貸し出し情報の更新()
+activate E2
+E2 --> C2: 更新結果
+deactivate E2
+
+C2 -> E3: 予約情報の確認()
+activate E3
+E3 --> C2: 予約情報
+deactivate E3
+
+alt 予約されている場合
+  C2 -> E4: メールアドレスの取得()
+  activate E4
+  E4 --> C2: メールアドレス
+  deactivate E4
+
+  C2 -> B3: 「この図書は予約されています。予約カウンターへ除けてください」メッセージを表示()
+  activate B3
+end
+
+C2 -> B3: 表示()
+deactivate C2
+
+@enduml

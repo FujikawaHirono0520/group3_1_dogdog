@@ -62,6 +62,7 @@ deactivate C2
 
 user -> B2: 図書一覧から該当する図書の「予約」を押下()
 B2 -> C3: 「予約情報(ISBN、会員番号、予約日時)」を送信()
+deactivate B2
 activate C3
 C3 -> E3: 「予約情報(ISBN、会員番号、予約日時)」を保存()
 activate E3
@@ -77,5 +78,6 @@ else 未貸し出しの図書がある場合
 end
 
 C3 --> B3:「「予約完了画面」表示
+deactivate C3
 
 @enduml

@@ -14,12 +14,13 @@ boundary 貸出完了画面 as rentComplete
 control 図書貸出画面表示 as rentDisp
 control 会員検索 as memberSearch
 control 貸出一覧追加 as rentListDisp
+control 貸出キャンセル as removeRent
 control 貸出処理 as rentProcess
 control 貸出完了画面表示 as rentCompleteDisp
 
-entity MenberDB as memberDB
-entity LibraryItemDB as libraryItemDB
-entity RentalDB as rentalDB
+entity 会員DB as memberDB
+entity 図書DB as libraryItemDB
+entity 貸出DB as rentalDB
 
 User -> menu: 「貸出」を選択
 
@@ -64,6 +65,13 @@ loop 貸出図書の登録
         rentListDisp -> rent: メッセージ表示：管理番号を確認してください()
     else 貸出上限超過または学生への雑誌貸出
         rentListDisp -> rent: メッセージ表示：貸出不可の理由()
+    else 入力した図書のキャンセル
+        User -> rentListDisp: 貸出一覧に表示されている図書の「キャンセル」を押下
+        rentListDisp -> removeRent
+
+        activate removeRent
+        removeRent -> rentListDisp: 貸出一覧から該当図書を削除()
+        deactivate removeRent
     end
 
     rentListDisp -> rent: 貸出一覧に書名を表示()
@@ -71,7 +79,9 @@ loop 貸出図書の登録
 
     break 貸出図書の登録[貸出図書をすべて入力]
         User -> rent: 貸出図書をすべて入力後、「貸出」を選択
+
         rent -> rentProcess
+        activate rentProcess
 
         alt 貸出確定図書が1冊もない
             rentProcess -> rent: メッセージ表示：貸出図書を登録してください()
@@ -83,7 +93,7 @@ loop 貸出図書の登録
     end
 end
 
-activate rentProcess
+
 rentProcess -> rentalDB: 入力内容を保存()
 
 activate rentalDB
@@ -100,6 +110,5 @@ deactivate rentCompleteDisp
 deactivate rent
 activate rentComplete
 rentComplete --> User: 貸出完了画面表示
-deactivate rentComplete
 
 @enduml

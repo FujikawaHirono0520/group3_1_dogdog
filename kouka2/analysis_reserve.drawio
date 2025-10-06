@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="pEpuz6DDx-xSXiD9G2zb" name="ページ1">
-        <mxGraphModel dx="1160" dy="493" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1118" dy="645" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -131,7 +131,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="31" value="認証" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
-                    <mxGeometry x="285" y="490" width="70" height="80" as="geometry"/>
+                    <mxGeometry x="285" y="400" width="70" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="" style="endArrow=classic;html=1;" parent="1" source="14" target="31" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -147,11 +147,13 @@
                 <mxCell id="34" value="予約完了画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
                     <mxGeometry x="270" y="600" width="100" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="37" value="" style="endArrow=classic;startArrow=classic;html=1;" parent="1" source="31" target="7" edge="1">
+                <mxCell id="37" value="" style="endArrow=classic;startArrow=classic;html=1;exitX=0.844;exitY=0.893;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="31" target="7" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="440" y="400" as="sourcePoint"/>
                         <mxPoint x="490" y="350" as="targetPoint"/>
-                        <Array as="points"/>
+                        <Array as="points">
+                            <mxPoint x="344" y="530"/>
+                        </Array>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="51" value="予約情報(ISBN、会員番号、予約日時)を保存" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="37" vertex="1" connectable="0">
@@ -164,14 +166,14 @@
                         <mxPoint x="120" y="420" as="sourcePoint"/>
                         <mxPoint x="330" y="180" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="140" y="510"/>
-                            <mxPoint x="140" y="360"/>
+                            <mxPoint x="130" y="440"/>
+                            <mxPoint x="130" y="330"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="40" value="&lt;div&gt;学生が雑誌を予約する場合&lt;/div&gt;「学生は雑誌を予約できません」表示&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;未貸し出しの場合&lt;/div&gt;&lt;div&gt;「在庫があります」表示&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;" parent="38" vertex="1" connectable="0">
                     <mxGeometry x="0.0913" y="-1" relative="1" as="geometry">
-                        <mxPoint x="9" y="52" as="offset"/>
+                        <mxPoint x="39" y="6" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="50" value="" style="endArrow=classic;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="2" target="34" edge="1">
@@ -179,7 +181,7 @@
                         <mxPoint x="50" y="442.3809814453125" as="sourcePoint"/>
                         <mxPoint x="290" y="460" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="60" y="640"/>
+                            <mxPoint x="80" y="640"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>

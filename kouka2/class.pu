@@ -1,0 +1,84 @@
+@startuml .
+skinparam classAttributeIconSize 0
+
+class 会員{
+  - 会員番号: String
+  - 氏名: String
+  - メールアドレス: String
+}
+
+class 学生{
+  - 学生番号: String
+  - 氏名: String
+  - メールアドレス: String
+}
+
+class 職員{
+  - 職員番号: String
+  - 氏名: String
+  - メールアドレス: String
+}
+
+class 予約情報{
+  - 会員番号: String
+  - 管理番号: String
+  - 予約日時: Date
+
+  + 予約情報の作成()
+}
+
+class 貸し出し情報{
+  - 会員番号: String
+  - 管理番号: String
+  - 貸し出し日: Date
+  - 返却日: Date
+  - ステータス: {貸し出し中,返却済み}
+
+  + 貸し出し情報の作成()
+  + 貸し出し情報の表示()
+  + 貸し出し情報の変更()
+}
+
+class 図書{
+  - 管理番号: String
+  - 書名: String
+  - 著者: String
+  - 出版社: String
+  - ISBN: String
+}
+
+class 書籍{
+  - 管理番号: String
+  - 書名: String
+  - 著者: String
+  - 出版社: String
+  - ISBN: String
+}
+
+class 雑誌{
+  - 管理番号: String
+  - 書名: String
+  - 著者: String
+  - 出版社: String
+  - ISBN: String
+}
+
+会員 <|-- 学生
+
+会員 <|-- 職員
+
+図書 <|-- 書籍
+
+図書 <|-- 雑誌
+
+学生 "1" o-- "0..6" 貸し出し情報
+
+職員 "1" o-- "0..12" 貸し出し情報
+
+会員 "1" o-- "0..*" 予約情報
+
+貸し出し情報 "0..1" o-- "1" 図書
+
+予約情報 "0..*" o-- "1" 図書
+
+@enduml

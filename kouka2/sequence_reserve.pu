@@ -11,8 +11,9 @@ boundary 予約完了画面 as B3
 control 認証 as C1
 control 検索 as C2
 control 保存 as C3
-entity 図書DB as E1
-entity 予約DB as E2
+entity 会員DB as E1
+entity 図書DB as E2
+entity 予約DB as E3
 
 user -> B1: 「予約メニュー」を押下()
 activate B1
@@ -30,6 +31,10 @@ alt 会員番号未入力または未登録
 
 end
 
+C1 -> E1: 「会員の氏名、会員種別」を取得()
+activate E1
+E1 --> C1: 
+deactivate E1
 C1 --> B2: 「会員の氏名、会員種別」表示
 deactivate C1
 
@@ -45,10 +50,10 @@ else 該当する図書が存在しない場合
 
 end
 
-C2 -> E1: 入力された書名に該当する図書の「書名、著者、出版社」を取得()
-activate E1
-E1 --> C2: 
-deactivate E1
+C2 -> E2: 入力された書名に該当する図書の「書名、著者、出版社」を取得()
+activate E2
+E2 --> C2: 
+deactivate E2
 C2 --> B2:図書一覧に「書名、著者、出版社」を表示
 deactivate C2
 
@@ -63,10 +68,10 @@ else 未貸し出しの図書がある場合
     C3 --> B3: 「在庫があります」表示
 
 end
-C3 -> E2: 「予約情報(ISBN、会員番号、予約日時)」を保存()
-activate E2
-E2 --> C3: 
-deactivate E2
+C3 -> E3: 「予約情報(ISBN、会員番号、予約日時)」を保存()
+activate E3
+E3 --> C3: 
+deactivate E3
 C3 --> B3:「「予約完了画面」表示
 
 @enduml

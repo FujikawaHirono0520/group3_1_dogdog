@@ -1,5 +1,4 @@
-@startuml
-title 貸出履歴検索・一覧表示シーケンス図 (アクティベーションバー付き)
+@startuml  貸出履歴検索・一覧表示シーケンス図 
 
 ' 図の下部にある参加者名を非表示にします
 hide footbox
@@ -17,17 +16,17 @@ entity "貸出DB" as LoanDB
 
 
 ' 処理開始
-事務職員 -> Menu : 貸出履歴メニューを押下
+事務職員 -> Menu : 貸出履歴メニューを押下()
 activate Menu
-Menu -> SearchDisplayControl : 
+Menu -> SearchDisplayControl
 deactivate Menu
 activate SearchDisplayControl
-SearchDisplayControl -> SearchScreen : 
+SearchDisplayControl -> SearchScreen
 deactivate SearchDisplayControl
 activate SearchScreen
 
 ' 1. 書名による検索のフロー
-事務職員 -> SearchScreen : 検索ボタンを押下 
+事務職員 -> SearchScreen : 検索ボタンを押下()
 SearchScreen -> TitleSearchControl : 書名検索()
 activate TitleSearchControl
 
@@ -41,14 +40,14 @@ SearchScreen --> 事務職員 : 検索結果を表示
 
 ' 検索エラーメッセージ表示ルート
 alt 書名が未記入or該当図書が存在しない場合
-    TitleSearchControl -> SearchScreen : エラーメッセージを表示
+    TitleSearchControl -> SearchScreen : エラーメッセージを表示()
     deactivate TitleSearchControl
-    SearchScreen --> 事務職員 : エラーメッセージを表示
+    SearchScreen --> 事務職員 : エラーメッセージを表示()
 end
 
 
 ' 2. 管理番号による一覧表示のフロー
-事務職員 -> SearchScreen : 管理番号を押下
+事務職員 -> SearchScreen : 管理番号を押下()
 SearchScreen -> IdSearchControl : 管理番号検索()
 deactivate SearchScreen
 activate IdSearchControl
@@ -65,9 +64,9 @@ ListScreen --> 事務職員 : 検索結果を表示
 
 ' 一覧表示エラーメッセージ表示ルート
 alt 該当する貸出履歴件数が0の場合
-    IdSearchControl -> ListScreen : エラーメッセージを表示
+    IdSearchControl -> ListScreen : エラーメッセージを表示()
     deactivate IdSearchControl
-    ListScreen --> 事務職員 : エラーメッセージを表示
+    ListScreen --> 事務職員 : エラーメッセージを表示()
     deactivate ListScreen
 end
 

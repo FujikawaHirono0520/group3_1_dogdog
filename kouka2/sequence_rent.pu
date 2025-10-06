@@ -1,0 +1,114 @@
+@startuml rent
+
+hide footbox
+skinparam BoundaryBackgroundColor #D5E8D4
+skinparam ControlBackgroundColor #F8CECC
+skinparam EntityBackgroundColor #DAE8FC
+
+actor 事務職員 as User
+
+boundary メニュー画面 as menu
+boundary 図書貸出画面 as rent
+boundary 貸出完了画面 as rentComplete
+
+control 図書貸出画面表示 as rentDisp
+control 会員検索 as memberSearch
+control 貸出一覧追加 as rentListDisp
+control 貸出キャンセル as removeRent
+control 貸出処理 as rentProcess
+control 貸出完了画面表示 as rentCompleteDisp
+
+entity 会員DB as memberDB
+entity 図書DB as libraryItemDB
+entity 貸出DB as rentalDB
+
+User -> menu: 「貸出」を選択
+
+activate menu
+menu -> rentDisp
+
+activate rentDisp
+rentDisp -> rent: 図書貸出画面表示()
+deactivate menu
+deactivate rentDisp
+
+activate rent
+User -> rent: 会員番号を入力、確定
+rent -> memberSearch
+
+activate memberSearch
+memberSearch -> memberDB: 会員情報を取得()
+
+activate memberDB
+memberDB --> memberSearch: 会員情報
+deactivate memberDB
+
+alt 会員番号未入力または未登録
+    memberSearch -> rent: メッセージ表示：会員番号を確認してください()
+end
+
+memberSearch -> rent: 会員の氏名、会員種別を表示()
+deactivate memberSearch
+
+loop 貸出図書の登録
+    User -> rent: 管理番号を入力、確定
+    rent -> rentListDisp
+
+    activate rentListDisp
+    rentListDisp -> libraryItemDB: 図書情報を取得()
+
+    activate libraryItemDB
+    libraryItemDB --> rentListDisp: 図書情報
+    deactivate libraryItemDB
+
+    alt 管理番号未入力または未登録
+        rentListDisp -> rent: メッセージ表示：管理番号を確認してください()
+    else 貸出上限超過または学生への雑誌貸出
+        rentListDisp -> rent: メッセージ表示：貸出不可の理由()
+    else 入力した図書のキャンセル
+        User -> rentListDisp: 貸出一覧に表示されている図書の「キャンセル」を押下
+        rentListDisp -> removeRent
+
+        activate removeRent
+        removeRent -> rentListDisp: 貸出一覧から該当図書を削除()
+        deactivate removeRent
+    end
+
+    rentListDisp -> rent: 貸出一覧に書名を表示()
+    deactivate rentListDisp
+
+    break 貸出図書の登録[貸出図書をすべて入力]
+        User -> rent: 貸出図書をすべて入力後、「貸出」を選択
+
+        rent -> rentProcess
+        activate rentProcess
+
+        alt 貸出確定図書が1冊もない
+            rentProcess -> rent: メッセージ表示：貸出図書を登録してください()
+            note right
+                図書の登録が1冊もない場合は貸出処理を行わずに
+                図書貸出画面に戻る
+            end note
+        end
+    end
+end
+
+
+rentProcess -> rentalDB: 入力内容を保存()
+
+activate rentalDB
+rentalDB --> rentProcess: 処理結果
+deactivate rentalDB
+
+rentProcess -> rentCompleteDisp
+deactivate rentProcess
+
+activate rentCompleteDisp
+rentCompleteDisp -> rentComplete: 貸出完了画面表示()
+deactivate rentCompleteDisp
+
+deactivate rent
+activate rentComplete
+rentComplete --> User: 貸出完了画面表示
+
+@enduml

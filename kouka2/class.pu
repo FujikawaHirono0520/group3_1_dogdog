@@ -1,84 +1,88 @@
 @startuml .
 skinparam classAttributeIconSize 0
 
-class 会員{
-  - 会員番号: String
-  - 氏名: String
-  - メールアドレス: String
+class Member {
+  - memberId: String
+  - name: String
+  - email: String
 }
 
-class 学生{
-  - 学生番号: String
-  - 氏名: String
-  - メールアドレス: String
+class Student {
+  - studentId: String
+  - name: String
+  - email: String
+  - position: String
 }
 
-class 職員{
-  - 職員番号: String
-  - 氏名: String
-  - メールアドレス: String
+class Staff {
+  - staffId: String
+  - name: String
+  - email: String
+  - position: String
 }
 
-class 予約情報{
-  - 会員番号: String
-  - 管理番号: String
-  - 予約日時: Date
+class Reservation {
+  - memberId: String
+  - managementNumber: String
+  - reservationDate: Date
 
-  + 予約情報の作成()
+  + createReservation()
 }
 
-class 貸し出し情報{
-  - 会員番号: String
-  - 管理番号: String
-  - 貸し出し日: Date
-  - 返却日: Date
-  - ステータス: {貸し出し中,返却済み}
+class Rental {
+  - memberId: String
+  - managementNumber: String
+  - rentalDate: Date
+  - returnDate: Date
+  - status: {Rental, Returned}
 
-  + 貸し出し情報の作成()
-  + 貸し出し情報の表示()
-  + 貸し出し情報の変更()
+  + createrental()
+  + viewrental()
+  + updaterental()
 }
 
-class 図書{
-  - 管理番号: String
-  - 書名: String
-  - 著者: String
-  - 出版社: String
+class LibraryItem {
+  - managementNumber: String
+  - title: String
+  - author: String
+  - publisher: String
   - ISBN: String
 }
 
-class 書籍{
-  - 管理番号: String
-  - 書名: String
-  - 著者: String
-  - 出版社: String
+class Book {
+  - managementNumber: String
+  - title: String
+  - author: String
+  - publisher: String
   - ISBN: String
+  - class: String
 }
 
-class 雑誌{
-  - 管理番号: String
-  - 書名: String
-  - 著者: String
-  - 出版社: String
+class Magazine {
+  - managementNumber: String
+  - title: String
+  - author: String
+  - publisher: String
   - ISBN: String
+  - class: String
 }
 
-会員 <|-- 学生
+Member <|-- Student
 
-会員 <|-- 職員
+Member <|-- Staff
 
-図書 <|-- 書籍
+LibraryItem <|-- Book
 
-図書 <|-- 雑誌
+LibraryItem <|-- Magazine
 
-学生 "1" o-- "0..6" 貸し出し情報
+Student "1" o-- "0..6" Rental
 
-職員 "1" o-- "0..12" 貸し出し情報
+Staff "1" o-- "0..12" Rental
 
-会員 "1" o-- "0..*" 予約情報
+Member "1" o-- "0..*" Reservation
 
-貸し出し情報 "0..1" o-- "1" 図書
+Rental "0..1" o-- "1" LibraryItem
 
-予約情報 "0..*" o-- "1" 図書
+Reservation "0..*" o-- "1" LibraryItem
 
 @enduml

@@ -1,0 +1,72 @@
+@startuml
+hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor 事務職員 as user
+boundary メニュー画面 as B1
+boundary 図書予約画面 as B2
+boundary 予約完了画面 as B3
+control 認証 as C1
+control 検索 as C2
+control 保存 as C3
+entity 図書DB as E1
+entity 予約DB as E2
+
+user -> B1: 「予約メニュー」を押下()
+activate B1
+
+B1 -> B2: 表示()
+deactivate B1
+activate B2
+user -> B2: 「会員番号」を入力、確認()
+
+B2 -> C1: 「会員番号」を送信()
+activate C1
+
+alt 会員番号未入力または未登録
+    C1 --> B2: 「会員番号を確認してください」表示
+
+end
+
+C1 --> B2: 「会員の氏名、会員種別」表示
+deactivate C1
+
+user -> B2: 「書名」を入力し、「検索」を押下()
+B2 -> C2: 「書名」を送信()
+activate C2
+
+alt 書名が未入力の場合
+    C2 --> B2: 「書名を入力してください」表示
+
+else 該当する図書が存在しない場合
+    C2 --> B2: 「該当する図書が見つかりません」表示
+
+end
+
+C2 -> E1: 入力された書名に該当する図書の「書名、著者、出版社」を取得()
+activate E1
+E1 --> C2: 
+deactivate E1
+C2 --> B2:図書一覧に「書名、著者、出版社」を表示
+deactivate C2
+
+user -> B2: 図書一覧から該当する図書の「予約」を押下()
+B2 -> C3: 「予約情報(ISBN、会員番号、予約日時)」を送信()
+activate C3
+
+alt 学生が雑誌を予約する場合
+    C3 --> B3: 「学生は雑誌を予約できません」表示
+    activate B3
+else 未貸し出しの図書がある場合
+    C3 --> B3: 「在庫があります」表示
+
+end
+C3 -> E2: 「予約情報(ISBN、会員番号、予約日時)」を保存()
+activate E2
+E2 --> C3: 
+deactivate E2
+C3 --> B3:「「予約完了画面」表示
+
+@enduml
